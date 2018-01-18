@@ -80,6 +80,27 @@ namespace IdsServer
                     },
 
                     AllowOfflineAccess = true
+                },
+
+
+                // JavaScript Client
+                new Client
+                {
+                    ClientId = "js",
+                    ClientName = "JavaScript Client",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+
+                    RedirectUris =           { "http://localhost:5003/callback.html" },
+                    PostLogoutRedirectUris = { "http://localhost:5003/index.html" },
+                    AllowedCorsOrigins =     { "http://localhost:5003" },
+
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "api1"
+                    }
                 }
             };
         }
@@ -91,8 +112,8 @@ namespace IdsServer
                 new TestUser
                 {
                     SubjectId = "1",
-                    Username = "alice",
-                    Password = "password",
+                    Username = "fuck",
+                    Password = "111111",
 
                     Claims = new []
                     {
@@ -103,8 +124,8 @@ namespace IdsServer
                 new TestUser
                 {
                     SubjectId = "2",
-                    Username = "bob",
-                    Password = "password",
+                    Username = "fuck2",
+                    Password = "111111",
                     Claims = new []
                     {
                         new Claim("name", "Bob"),

@@ -5,6 +5,13 @@
     <title></title>
 </head>
 <body>
-
+    <script src="lib/oidc-client/dist/oidc-client.js"></script>
+    <script>
+        new Oidc.UserManager().signinRedirectCallback().then(function () {
+            window.location = "index.html";
+        }).catch(function (e) {
+            console.error(e);
+        });
+    </script>
 </body>
 </html>
