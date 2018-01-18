@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityServer4Document", "IdentityServer4Document", "{38E612CB-AD93-4999-90E4-23AB39CB5F00}"
+	ProjectSection(SolutionItems) = preProject
+		SQLQuery1.sql = SQLQuery1.sql
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OcelotDocument", "OcelotDocument", "{F9587399-3B92-448F-A264-6CEA870E71EE}"
 EndProject

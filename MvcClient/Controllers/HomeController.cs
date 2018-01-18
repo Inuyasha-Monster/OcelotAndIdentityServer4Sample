@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using IdentityModel.Client;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -53,7 +54,21 @@ namespace MvcClient.Controllers
             client.SetBearerToken(accessToken);
             var content = await client.GetStringAsync("http://localhost:5001/identity");
             var json = JArray.Parse(content).ToString();
-            return Json(content);
+            return Json(json);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CallApiUsingClientCredentials()
+        {
+            var tokenClient = new TokenClient("http://localhost:5000/connect/token", "mvc", "secret");
+            var tokenResponse = await tokenClient.RequestClientCredentialsAsync("api1");
+
+            var client = new HttpClient();
+            client.SetBearerToken(tokenResponse.AccessToken);
+            var content = await client.GetStringAsync("http://localhost:5001/identity");
+
+            var json = JArray.Parse(content).ToString();
+            return Json(json);
         }
     }
 }
