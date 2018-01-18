@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Authentication
+
+@{
     ViewData["Title"] = "About";
 }
 <h2>@ViewData["Title"]</h2>
@@ -13,3 +15,9 @@
         <dd>@claim.Value</dd>
     }
 </dl>
+
+<dt>access token</dt>
+<dd>@await ViewContext.HttpContext.GetTokenAsync("access_token")</dd>
+
+<dt>refresh token</dt>
+<dd>@await ViewContext.HttpContext.GetTokenAsync("refresh_token")</dd>
