@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiResource", "ApiResource\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiClient", "ApiClient\ApiClient.csproj", "{2A0B11C5-06B3-4A2B-9672-2347FDD3E253}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcClient", "MvcClient\MvcClient.csproj", "{B5B414EF-5AF4-419D-BF0B-D79AF4D6726F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{2A0B11C5-06B3-4A2B-9672-2347FDD3E253}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A0B11C5-06B3-4A2B-9672-2347FDD3E253}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A0B11C5-06B3-4A2B-9672-2347FDD3E253}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5B414EF-5AF4-419D-BF0B-D79AF4D6726F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5B414EF-5AF4-419D-BF0B-D79AF4D6726F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5B414EF-5AF4-419D-BF0B-D79AF4D6726F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5B414EF-5AF4-419D-BF0B-D79AF4D6726F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +45,7 @@ Global
 		{8BB83567-55C5-4690-8321-CC212246ABA6} = {38E612CB-AD93-4999-90E4-23AB39CB5F00}
 		{EF7D61EF-F326-4FE1-94EA-266AEE628DB9} = {38E612CB-AD93-4999-90E4-23AB39CB5F00}
 		{2A0B11C5-06B3-4A2B-9672-2347FDD3E253} = {38E612CB-AD93-4999-90E4-23AB39CB5F00}
+		{B5B414EF-5AF4-419D-BF0B-D79AF4D6726F} = {38E612CB-AD93-4999-90E4-23AB39CB5F00}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6AE6CF43-C85F-411F-A479-7F8A2E15631E}
