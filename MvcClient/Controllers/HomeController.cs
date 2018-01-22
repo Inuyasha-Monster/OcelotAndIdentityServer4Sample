@@ -13,7 +13,6 @@ using Newtonsoft.Json.Linq;
 
 namespace MvcClient.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         public IActionResult Index()
@@ -21,6 +20,7 @@ namespace MvcClient.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
