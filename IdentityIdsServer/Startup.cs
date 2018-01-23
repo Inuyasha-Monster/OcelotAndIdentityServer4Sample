@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using IdentityIdsServer.Data;
 using IdentityIdsServer.Models;
 using IdentityIdsServer.Services;
+using IdentityServer4.Services;
 
 namespace IdentityIdsServer
 {
@@ -29,7 +30,16 @@ namespace IdentityIdsServer
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(identityOptions =>
+                {
+                    // password settings chosen due to NIST SP 800-63
+                    identityOptions.Password.RequiredLength = 6; // personally i'd prefer to see 10+
+                    identityOptions.Password.RequiredUniqueChars = 0;
+                    identityOptions.Password.RequireDigit = false;
+                    identityOptions.Password.RequireLowercase = false;
+                    identityOptions.Password.RequireUppercase = false;
+                    identityOptions.Password.RequireNonAlphanumeric = false;
+                })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -45,7 +55,8 @@ namespace IdentityIdsServer
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
                 .AddInMemoryApiResources(Config.GetApiResources())
                 .AddInMemoryClients(Config.GetClients())
-                .AddAspNetIdentity<ApplicationUser>();
+                .AddAspNetIdentity<ApplicationUser>()
+                .Services.AddScoped<IProfileService, ProfileService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

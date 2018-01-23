@@ -9,5 +9,14 @@ namespace IdentityIdsServer.Models
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
+        /// <summary>
+        /// 年龄
+        /// </summary>
+        public int Age { get; set; }
+
+        /// <summary>
+        /// 头像
+        /// </summary>
+        public string Avator { get; set; }
     }
 }

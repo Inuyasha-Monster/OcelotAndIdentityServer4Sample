@@ -14,7 +14,23 @@ namespace IdentityIdsServer
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            Console.Title = "Fuck";
+
+            var seed = args.Contains("/seed");
+            if (seed)
+            {
+                args = args.Except(new[] { "/seed" }).ToArray();
+            }
+
+            var host = BuildWebHost(args);
+
+            if (seed)
+            {
+                SeedData.EnsureSeedData(host.Services);
+            }
+
+
+            host.Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
