@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace MvcClient
 {
@@ -40,10 +41,10 @@ namespace MvcClient
 
                     options.ClientId = "mvc";
                     options.ClientSecret = "secret";
-                    options.ResponseType = "code id_token";
+                    options.ResponseType = OpenIdConnectResponseType.CodeIdToken;
 
                     options.SaveTokens = true;
-                    options.GetClaimsFromUserInfoEndpoint = true;
+                    //options.GetClaimsFromUserInfoEndpoint = true;
                     options.Scope.Add("api1");
                     options.Scope.Add("offline_access");
                 });

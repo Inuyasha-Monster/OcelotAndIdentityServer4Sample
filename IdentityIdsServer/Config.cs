@@ -43,6 +43,11 @@ namespace IdentityIdsServer
                         new Secret("secret".Sha256())
                     },
 
+                    AllowAccessTokensViaBrowser = true,
+
+
+                    AlwaysIncludeUserClaimsInIdToken = true,
+
                     RedirectUris           = { "http://localhost:5002/signin-oidc" },
                     PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" },
 

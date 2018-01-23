@@ -26,48 +26,54 @@ namespace IdentityIdsServer.Services
         {
             var claims = new List<Claim>
             {
-                new Claim(JwtClaimTypes.Subject, await _userManager.GetUserIdAsync(user)),
-                new Claim(JwtClaimTypes.Name, await _userManager.GetUserNameAsync(user))
+                new Claim(JwtClaimTypes.Subject, user.Id.ToString()),
+                new Claim(JwtClaimTypes.PreferredUserName, user.UserName)
             };
 
-            if (_userManager.SupportsUserEmail)
-            {
-                var email = await _userManager.GetEmailAsync(user);
-                if (!string.IsNullOrWhiteSpace(email))
-                {
-                    claims.AddRange(new[]
-                    {
-                        new Claim(JwtClaimTypes.Email, email),
-                        new Claim(JwtClaimTypes.EmailVerified,
-                            await _userManager.IsEmailConfirmedAsync(user) ? "true" : "false", ClaimValueTypes.Boolean)
-                    });
-                }
-            }
+            //if (_userManager.SupportsUserEmail)
+            //{
+            //    var email = await _userManager.GetEmailAsync(user);
+            //    if (!string.IsNullOrWhiteSpace(email))
+            //    {
+            //        claims.AddRange(new[]
+            //        {
+            //            new Claim(JwtClaimTypes.Email, email),
+            //            new Claim(JwtClaimTypes.EmailVerified,
+            //                await _userManager.IsEmailConfirmedAsync(user) ? "true" : "false", ClaimValueTypes.Boolean)
+            //        });
+            //    }
+            //}
 
-            if (_userManager.SupportsUserPhoneNumber)
-            {
-                var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-                if (!string.IsNullOrWhiteSpace(phoneNumber))
-                {
-                    claims.AddRange(new[]
-                    {
-                        new Claim(JwtClaimTypes.PhoneNumber, phoneNumber),
-                        new Claim(JwtClaimTypes.PhoneNumberVerified,
-                            await _userManager.IsPhoneNumberConfirmedAsync(user) ? "true" : "false", ClaimValueTypes.Boolean)
-                    });
-                }
-            }
+            //if (_userManager.SupportsUserPhoneNumber)
+            //{
+            //    var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            //    if (!string.IsNullOrWhiteSpace(phoneNumber))
+            //    {
+            //        claims.AddRange(new[]
+            //        {
+            //            new Claim(JwtClaimTypes.PhoneNumber, phoneNumber),
+            //            new Claim(JwtClaimTypes.PhoneNumberVerified,
+            //                await _userManager.IsPhoneNumberConfirmedAsync(user) ? "true" : "false", ClaimValueTypes.Boolean)
+            //        });
+            //    }
+            //}
 
-            if (_userManager.SupportsUserClaim)
-            {
-                claims.AddRange(await _userManager.GetClaimsAsync(user));
-            }
+            //if (_userManager.SupportsUserClaim)
+            //{
+            //    claims.AddRange(await _userManager.GetClaimsAsync(user));
+            //}
 
-            if (_userManager.SupportsUserRole)
-            {
-                var roles = await _userManager.GetRolesAsync(user);
-                claims.AddRange(roles.Select(role => new Claim(JwtClaimTypes.Role, role)));
-            }
+            //if (_userManager.SupportsUserRole)
+            //{
+            //    var roles = await _userManager.GetRolesAsync(user);
+            //    claims.AddRange(roles.Select(role => new Claim(JwtClaimTypes.Role, role)));
+            //}
+
+            var roles = await _userManager.GetRolesAsync(user);
+            claims.AddRange(roles.Select(role => new Claim(JwtClaimTypes.Role, role)));
+
+            claims.Add(new Claim("age", user.Age.ToString()));
+            claims.Add(new Claim("avator", user.Avator));
 
             return claims;
         }
@@ -78,7 +84,7 @@ namespace IdentityIdsServer.Services
 
             var claims = await GetClaimsAsync(user);
 
-            claims = claims.Where(claim => context.RequestedClaimTypes.Contains(claim.Type)).ToList();
+            //claims = claims.Where(claim => context.RequestedClaimTypes.Contains(claim.Type)).ToList();
 
             context.IssuedClaims = claims;
         }
@@ -90,31 +96,33 @@ namespace IdentityIdsServer.Services
 
             context.IsActive = false;
 
-            var subject = context.Subject;
+            //var subject = context.Subject;
             var user = await _userManager.FindByIdAsync(context.Subject.GetSubjectId());
 
             if (user != null)
             {
-                var securityStampChanged = false;
+                //var securityStampChanged = false;
 
-                if (_userManager.SupportsUserSecurityStamp)
-                {
-                    var securityStamp = (
-                        from claim in subject.Claims
-                        where claim.Type == "security_stamp"
-                        select claim.Value
-                    ).SingleOrDefault();
+                //if (_userManager.SupportsUserSecurityStamp)
+                //{
+                //    var securityStamp = (
+                //        from claim in subject.Claims
+                //        where claim.Type == "security_stamp"
+                //        select claim.Value
+                //    ).SingleOrDefault();
 
-                    if (securityStamp != null)
-                    {
-                        var latestSecurityStamp = await _userManager.GetSecurityStampAsync(user);
-                        securityStampChanged = securityStamp != latestSecurityStamp;
-                    }
-                }
+                //    if (securityStamp != null)
+                //    {
+                //        var latestSecurityStamp = await _userManager.GetSecurityStampAsync(user);
+                //        securityStampChanged = securityStamp != latestSecurityStamp;
+                //    }
+                //}
 
-                context.IsActive =
-                    !securityStampChanged &&
-                    !await _userManager.IsLockedOutAsync(user);
+                context.IsActive = true;
+
+                //context.IsActive =
+                //    !securityStampChanged &&
+                //    !await _userManager.IsLockedOutAsync(user);
             }
         }
     }
