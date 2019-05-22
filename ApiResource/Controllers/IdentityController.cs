@@ -11,7 +11,7 @@ namespace ApiResource.Controllers
 {
     [Route("identity")]
     [Authorize]
-    public class IdentityController : ControllerBase
+    public class IdentityController : Controller
     {
         // GET: api/values
         [HttpGet]

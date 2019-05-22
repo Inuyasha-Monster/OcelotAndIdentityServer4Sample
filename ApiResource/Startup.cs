@@ -56,6 +56,7 @@ namespace ApiResource
             app.UseCors("default");
             app.UseAuthentication();
             app.UseMvc();
+            app.UseMvcWithDefaultRoute();
         }
     }
 }

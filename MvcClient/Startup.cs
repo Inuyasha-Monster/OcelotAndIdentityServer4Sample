@@ -39,7 +39,7 @@ namespace MvcClient
                     options.SignInScheme = "Cookies";
                     options.Authority = "http://localhost:5000";
                     options.RequireHttpsMetadata = false;
-                    options.ResponseType = OpenIdConnectResponseType.CodeIdToken;
+                    options.ResponseType = OpenIdConnectResponseType.CodeIdTokenToken;
                     options.ClientId = "mvc";
                     options.ClientSecret = "secret";
                     options.SaveTokens = true;
